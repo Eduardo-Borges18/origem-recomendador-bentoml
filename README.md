@@ -37,16 +37,26 @@ bentoml serve service:RecomendadorOrigem --port 3000
 
 O serviço deve ficar em `http://localhost:3000`. Em outro terminal, use os comandos abaixo. No PowerShell, substitua `curl` por `curl.exe`.
 
-## Ambiente de validação informado
+## Ambiente de validação
 
-Uma revisão externa informou que clonou o repositório, instalou as dependências de `requirements.txt` e subiu o serviço BentoML com **Python 3.11.9**. Os quatro casos documentados abaixo passaram nessa execução. As versões exatas de BentoML e FastAPI não foram informadas; o arquivo `requirements.txt` define os intervalos aceitos. Para registrar as versões no ambiente em que o docente reproduzir o mockup:
+O serviço foi instalado e executado a partir do repositório em Windows, com as seguintes versões:
+
+| Componente | Versão verificada |
+|---|---|
+| Python | 3.11.9 |
+| BentoML | 1.4.39 |
+| FastAPI | 0.143.0 |
+
+Validação registrada por **Byteric** em **13/10/2026**, sobre o código do commit [`deb1ad8`](https://github.com/Eduardo-Borges18/origem-recomendador-bentoml/commit/deb1ad89774d3be5a218b2749ead4ee780756875), após as correções de logs e de limite excessivamente longo. Os quatro casos documentados abaixo passaram, incluindo a ordem dos itens, os campos públicos e os erros HTTP 400.
+
+Também foi confirmado que um `limite` com 4.301 dígitos retorna HTTP 400 com o código `LIMITE_INVALIDO`. Os logs INFO emitiram estratégia, quantidade, duração e status, conforme o RF-08.
+
+Para conferir as versões no ambiente em que o docente reproduzir o mockup:
 
 ```bash
 python --version
 python -m pip show bentoml fastapi
 ```
-
-As correções posteriores de logs INFO e de limite excessivamente longo ainda não têm nova execução registrada.
 
 ## Contrato
 
@@ -75,7 +85,7 @@ Os RNFs de desempenho com 1.000 itens e testes contra PostgreSQL real são metas
 
 ## Casos de teste copiáveis
 
-Os resultados esperados foram calculados a partir do catálogo sintético e do código. Conforme a revisão externa apresentada pela squad, os quatro comandos abaixo foram executados em Python 3.11.9 antes das correções posteriores e passaram, incluindo a ordem dos itens e os erros HTTP 400. Não há log de execução anexado nem registro das versões exatas de BentoML e FastAPI. Compare a resposta real com os campos mostrados; espaços e ordem das chaves JSON podem variar.
+Os quatro casos abaixo foram executados e passaram no ambiente de validação registrado acima, após as correções de logs INFO e de limite excessivamente longo. Foram conferidos os códigos HTTP, a estratégia, a ordem dos itens e os campos públicos das respostas de sucesso, além dos códigos de erro das entradas inválidas. Compare a resposta real com os campos mostrados; espaços e ordem das chaves JSON podem variar.
 
 ### 1. Produto relacionado: região, nota e elegibilidade
 
