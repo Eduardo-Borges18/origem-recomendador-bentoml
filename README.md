@@ -69,6 +69,8 @@ Com `produtoId` encontrado, o serviço filtra itens ativos, com estoque e da mes
 | RF-07 Erros | `GET /recomendacoes` | HTTP 400 com códigos `CONTEXTO_INVALIDO` ou `LIMITE_INVALIDO`. |
 | RF-08 Observabilidade | `service.py:registrar` | Loga estratégia, quantidade, duração e status sem dados pessoais. |
 
+**Conferência com a AV1 original:** comparei esta tabela com a seção de requisitos funcionais da especificação da AV1 (versão 1.0, 16/09/2026) e com `requirements.md`, usando acesso de leitura. RF-01 a RF-05, RF-07 e RF-08 correspondem ao contrato descrito; RF-06 prevê adapters no frontend e está identificado acima como fora deste mockup isolado. Os documentos originais do Drive exigem uma conta com permissão de leitura; esta tabela permite conferir o escopo do mockup diretamente no repositório.
+
 Os RNFs de desempenho com 1.000 itens e testes contra PostgreSQL real são metas da integração futura e não são demonstrados por este catálogo em memória. O mockup também não implementa sessão, persistência ou os adapters do frontend.
 
 ## Casos de teste copiáveis
