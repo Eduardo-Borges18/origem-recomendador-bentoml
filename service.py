@@ -14,6 +14,7 @@ from fastapi.responses import JSONResponse
 CATALOGO = json.loads(Path(__file__).with_name("catalogo.json").read_text(encoding="utf-8"))
 CAMPOS_PUBLICOS = ("id", "nome", "preco", "categoria", "imagemPrincipal", "notaMedia")
 logger = logging.getLogger("origem.recomendacoes")
+logger.setLevel(logging.INFO)
 app = FastAPI(title="Origem — Recomendador", version="1.0.0")
 
 
@@ -75,7 +76,10 @@ def recomendacoes(request: Request):
     limites = parametros.getlist("limite")
     if len(limites) > 1 or (limites and not re.fullmatch(r"[0-9]+", limites[0])):
         return erro("LIMITE_INVALIDO", "O limite deve ser inteiro entre 1 e 8.", inicio)
-    limite = int(limites[0]) if limites else 8
+    try:
+        limite = int(limites[0]) if limites else 8
+    except ValueError:
+        return erro("LIMITE_INVALIDO", "O limite deve ser inteiro entre 1 e 8.", inicio)
     if not 1 <= limite <= 8:
         return erro("LIMITE_INVALIDO", "O limite deve ser inteiro entre 1 e 8.", inicio)
 
